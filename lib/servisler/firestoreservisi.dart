@@ -24,5 +24,11 @@ class FireStoreServisi {
     return null;
   }
 
-  takipciSayisi(kullaniciId) {}
+  takipciSayisi(kullaniciId) async {
+    await _firestore
+        .collection("takipçi")
+        .document(kullaniciId)
+        .collection("kullanicininTakipcileri")
+        .getDocuments();
+  }
 }
