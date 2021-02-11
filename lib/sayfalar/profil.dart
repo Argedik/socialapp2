@@ -27,10 +27,19 @@ class _ProfilState extends State<Profil> {
     });
   }
 
+  _takipEdilenSayisiGetir() async {
+    int takipEdilenSayisi =
+        await FireStoreServisi().takipEdilenSayisi(widget.profilSahibiId);
+    setState(() {
+      _takipci = takipEdilenSayisi;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     _takipciSayisiGetir();
+    _takipEdilenSayisiGetir();
   }
 
   @override
