@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:socialapp2/servisler/storageservisi.dart';
 
 class Yukle extends StatefulWidget {
   @override
@@ -48,7 +49,7 @@ class _YukleState extends State<Yukle> {
         actions: [
           IconButton(
             icon: Icon(Icons.send, color: Colors.black),
-            onPressed: () {},
+            onPressed: _gonderiOlustur,
           )
         ],
       ),
@@ -80,6 +81,11 @@ class _YukleState extends State<Yukle> {
         ],
       ),
     );
+  }
+
+  void _gonderiOlustur() async {
+    String resimUrl = await StorageServisi().gonderiResmiYukle(dosya);
+    print(resimUrl);
   }
 
   fotografSec() {
