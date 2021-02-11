@@ -24,11 +24,12 @@ class FireStoreServisi {
     return null;
   }
 
-  takipciSayisi(kullaniciId) async {
-    await _firestore
-        .collection("takipçi")
+  Future<int> takipciSayisi(kullaniciId) async {
+    QuerySnapshot snapshot = await _firestore
+        .collection("takipciler")
         .document(kullaniciId)
         .collection("kullanicininTakipcileri")
         .getDocuments();
+    return snapshot.documents.length;
   }
 }
