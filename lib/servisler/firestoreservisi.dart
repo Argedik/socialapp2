@@ -32,4 +32,13 @@ class FireStoreServisi {
         .getDocuments();
     return snapshot.documents.length;
   }
+
+  Future<int> takipEdilenSayisi(kullaniciId) async {
+    QuerySnapshot snapshot = await _firestore
+        .collection("takipedilenler")
+        .document(kullaniciId)
+        .collection("kullanicininTakipleri")
+        .getDocuments();
+    return snapshot.documents.length;
+  }
 }
