@@ -10,6 +10,10 @@ class Yukle extends StatefulWidget {
 
 class _YukleState extends State<Yukle> {
   File dosya;
+  bool yukleniyor = false;
+
+  TextEditingController aciklamaTextKumandasi = TextEditingController();
+  TextEditingController konumTextKumandasi = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +30,56 @@ class _YukleState extends State<Yukle> {
   }
 
   Widget gonderiFormu() {
-    return Center(child: Text("Yüklenen resim ve text alanları gelecek."));
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.grey[100],
+        title: Text(
+          "Gönderi Oluştur",
+          style: TextStyle(color: Colors.black),
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            setState(() {
+              dosya = null;
+            });
+          },
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.send, color: Colors.black),
+            onPressed: () {},
+          )
+        ],
+      ),
+      body: ListView(
+        children: [
+          yukleniyor ? LinearProgressIndicator() : SizedBox(height: 0.0),
+          AspectRatio(
+            aspectRatio: 16.0 / 9.0,
+            child: Image.file(
+              dosya,
+              fit: BoxFit.cover,
+            ),
+          ),
+          SizedBox(height: 20.0),
+          TextFormField(
+            controller: aciklamaTextKumandasi,
+            decoration: InputDecoration(
+              hintText: "Açıklama Ekle",
+              contentPadding: EdgeInsets.only(left: 15.0, right: 15.0),
+            ),
+          ),
+          TextFormField(
+            controller: konumTextKumandasi,
+            decoration: InputDecoration(
+              hintText: "Fotoğraf nerede çekildi?",
+              contentPadding: EdgeInsets.only(left: 15.0, right: 15.0),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   fotografSec() {
@@ -44,7 +97,9 @@ class _YukleState extends State<Yukle> {
             ),
             SimpleDialogOption(
               child: Text("Galeriden  Yükle"),
-              onPressed: () {},
+              onPressed: () {
+                galeridenSec();
+              },
             ),
             SimpleDialogOption(
               child: Text("İptal"),
