@@ -26,13 +26,12 @@ class Kullanici {
   }
 
   factory Kullanici.dokumandanUret(DocumentSnapshot doc) {
-    var docData = doc.data;
     return Kullanici(
       id: doc.documentID,
-      kullaniciAdi: docData['kullaniciAdi'],
-      email: docData['email'],
-      fotoUrl: docData['fotoUrl'],
-      hakkinda: docData['hakkinda'],
+      kullaniciAdi: doc['kullaniciAdi'],
+      email: doc['email'],
+      fotoUrl: doc['fotoUrl'],
+      hakkinda: doc['hakkinda'],
     );
   }
 }
